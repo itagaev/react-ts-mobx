@@ -57,12 +57,14 @@ export const EmployeePage: FC = observer(() => {
   const handleEditOrCreateClicked = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (mode === "edit") {
-      store.updateEmployee(employee!);
-      setMode(null);
-    } else {
-      store.addEmployee(employee!);
-      history.push("/employees");
+    if (employee?.fullName) {
+      if (mode === "edit") {
+        store.updateEmployee(employee!);
+        setMode(null);
+      } else {
+        store.addEmployee(employee!);
+        history.push("/employees");
+      }
     }
   };
 
