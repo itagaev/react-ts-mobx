@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useRef } from "react";
 import { createTheme, ThemeProvider, Container } from "@material-ui/core";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
@@ -18,8 +18,14 @@ const theme = createTheme({
 });
 
 export const App: FC = () => {
+  const firstRender = useRef(true);
+
   useEffect(() => {
-    seedEmployees();
+    if (firstRender.current) {
+      seedEmployees();
+      console.log("seed");
+      firstRender.current = false;
+    }
   }, []);
 
   return (

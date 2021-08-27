@@ -13,21 +13,21 @@ export const EmployeesPage: FC = observer(() => {
   }, []);
 
   return (
-    <div className='d-flex flex-column align-items-center'>
-      <Typography className='mx-auto mb-5' variant='h4'>
+    <div className='d-flex flex-column align-items-center mb-5'>
+      <Typography className='text-center mb-5' variant='h4'>
         Список сотрудников
       </Typography>
 
       <Grid className='mb-4' container spacing={4}>
         {store.employees.map((employee) => (
-          <Grid item sm={12} md={6} lg={4}>
+          <Grid key={`employees-${employee.id}`} item sm={12} md={6} lg={4}>
             <EmployeeCard key={`employee-card-${employee.id}`} {...employee} />
           </Grid>
         ))}
       </Grid>
 
       <Link to={{ pathname: "/employees/0", search: "?mode=create" }}>
-        <Button className='mt-5' variant='contained' color='primary'>
+        <Button className='my-5' variant='contained' color='primary'>
           Добавить сотрудника
         </Button>
       </Link>

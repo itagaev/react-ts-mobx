@@ -42,9 +42,25 @@ export const seedEmployees = () =>
         birthDate: new Date(),
         jobTitle: "HR",
         workTime: "full",
-        gender: "male",
+        gender: "female",
       },
     ] as IEmployee[])
   );
 
 export const getEmployees = () => JSON.parse(localStorage.getItem("employees") as string);
+
+export const getEmployee = (employeeId: string): IEmployee | undefined =>
+  (JSON.parse(localStorage.getItem("employees") as string) as IEmployee[]).find(({ id }) => id === employeeId);
+
+export const deleteEmployeeFromLS = (employeeId: string) => {
+  const storage = JSON.parse(localStorage.getItem("employees") as string);
+
+  if (storage) {
+    localStorage.setItem("employees", JSON.stringify(storage.filter(({ id }: IEmployee) => id !== employeeId)));
+  }
+};
+
+export const updateEmployeeLS = (employees: IEmployee[]) => {
+  localStorage.removeItem("employees");
+  localStorage.setItem("employees", JSON.stringify(employees));
+};
